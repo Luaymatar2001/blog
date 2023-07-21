@@ -18,7 +18,7 @@ class news extends Model
   use HasFactory, SoftDeletes, HasSlug;
   protected $table = 'news';
   protected $fillable = ['title', 'subject', 'user_id', 'source_news', 'image'];
-  protected $appends = ['image_url', 'time_format'];
+  protected $appends = ['image_url', 'time_format', 'user_name'];
   public function user()
   {
     return $this->belongsTo(user::class, 'user_id')->withDefault([
@@ -29,7 +29,7 @@ class news extends Model
 
   public function reviews()
   {
-    return $this->hasMany(Review::class, 'news_id' , 'id');
+    return $this->hasMany(Review::class, 'news_id', 'id');
   }
   public static function booted()
   {
@@ -50,6 +50,10 @@ class news extends Model
     return  $path;
   }
 
+  public function getUserNameAttribute()
+  {
+    return User::where('id', $this->user_id)->first()->name;
+  }
   public function getTimeFormatAttribute()
   {
 

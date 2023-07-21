@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewNewsEvent
+class NewNewsEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $news;
@@ -30,7 +30,7 @@ class NewNewsEvent
     public function broadcastOn(): array
     {
         return [
-             'create_news',
+            'create_news',
         ];
     }
 

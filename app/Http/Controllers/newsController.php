@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewNewsEvent;
 use App\Http\Requests\newsRequest;
 use App\Models\news;
+use App\Models\User;
 use App\Notifications\blogNotifiaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,7 @@ class newsController extends Controller
         ]));
         $status->image = $path;
         $status->save();
-        $user = $status->with('user')->first();
+        $user = User::where('id', $status->user_id)->first();
         // dd($user->user);
         // $user->user->notify(
         //     new blogNotifiaction($status)
@@ -96,7 +97,7 @@ class newsController extends Controller
     public function destroy($slug)
     {
         $news = news::where('slug', $slug)->first();
-        Storage::disk('public')->delete($news->image_url);
+        Storage::disk('public')->delete($news->image);
         News::destroy($news->id);
         return redirect()->back()->with('status', true);
     }

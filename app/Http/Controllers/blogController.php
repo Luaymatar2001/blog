@@ -13,7 +13,7 @@ class blogController extends Controller
      */
     public function index()
     {
-        $news = news::withoutGlobalScope('owner')->get();
+        $news = news::withoutGlobalScope('owner')->with('user')->latest('updated_at')->get();
         $about = about::firstOrFail();
         $news->loadSum('reviews', 'rate');
         // dd($news->toArray());

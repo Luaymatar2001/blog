@@ -8,7 +8,43 @@ import './bootstrap';
 // Alpine.start();
 
 window.Echo.channel('create_news').listen('.new_news',(event)=>{ 
-   $("#div_news").prepend(event.news +"weweewewwewe");
+    console.log(event.news);
+   $("#div_news").prepend(` <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
+        <div class="inner-box">
+            <div class="image">
+                <a href="blog-detail.html"><img src="${event.news['image_url']}" alt="" /></a>
+            </div>
+            <div class="lower-content">
+                <div class="content">
+                    <ul class="post-info">
+                        <li><span class="icon flaticon-chat-comment-oval-speech-bubble-with-text-lines"></span>
+                            0</li>
+                    </ul>
+                    <ul class="post-meta">
+                        <li>${event.news['time_format']}</li>
+                       <li>${event.news['user_name']}</li>
+
+                        <li>
+                            <ul class="review">
+                             <li><i class="far fa-star" style="color: #e5e7eb;"></i></li>
+                             <li><i class="far fa-star" style="color: #e5e7eb;"></i></li>
+                             <li><i class="far fa-star" style="color: #e5e7eb;"></i></li>
+                             <li><i class="far fa-star" style="color: #e5e7eb;"></i></li>
+                             <li><i class="far fa-star" style="color: #e5e7eb;"></i></li>
+
+                    </ul>
+                    </li>
+                    </ul>
+                    <h3><a href="blog-detail.html">${event.news['title']}</a>
+                    </h3>
+                    <div class="text">${event.news['subject']}</div>
+                    <a href="http://127.0.0.1:8000/admin/news/${event.news['slug']}" class="theme-btn btn-style-five"><span
+                            class="txt">read
+                            more</span></a>
+                </div>
+            </div>
+        </div>
+    </div>`);
 });
 
 

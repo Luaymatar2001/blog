@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Models\news;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
@@ -17,9 +19,11 @@ class blogNotifiaction extends Notification
      * Create a new notification instance.
      */
     protected $news;
-    public function __construct(news $news)
+    public function __construct(news $news  )
     {
         $this->news = $news;
+    
+
     }
 
     /**
@@ -47,7 +51,7 @@ class blogNotifiaction extends Notification
     {
         return new BroadcastMessage([
             'news' => $this->news,
-            'time' => now()->diffForHumans(),
+
         ]);
     }
 
