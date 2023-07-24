@@ -11,7 +11,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>AdminLTE 3 | Starter</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- SweetAlert CSS -->
-
+    <link rel="stylesheet" href="{{asset('css/chat.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -69,17 +71,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </form>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fas fa-comment-dots fa-lg"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <x-ChatUsers />
+                </li>
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <x-admin-notification />
 
                 </li>
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
 
-                    {{-- <x-admin.notifications /> --}}
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -211,11 +216,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <p>register new admin</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('logout')}}" class="nav-link">
+                    <li class="nav-item" onclick="document.getElementById('form').submit()">
+                        <form action="{{route('logout')}}" method="post" id="form" class="nav-link">
+                            @csrf
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>LogOut </p>
-                        </a>
+                        </form>
                     </li>
                     </ul>
                 </nav>

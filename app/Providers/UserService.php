@@ -2,23 +2,27 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Events\ChatSent;
+use App\Models\Message;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
-class UserService extends ServiceProvider
+class UserService
 {
-    /**
-     * Register services.
-     */
-    public function register(): void
+    public function getUser($user_id)
     {
-        //
+        return User::where('id', $user_id)->first();
     }
-
-    /**
-     * Bootstrap services.
-     */
-    public function boot(): void
+    public function sendMessage($user_id, $message)
     {
-        //
+        $data['sender'] = Auth::id();
+        $data['receiver'] = $user_id;
+        $data['message'] = $message;
+
+        Message::create($data);
+        // chat.sent
+        $receiver = $this->getUser($user_id);
+        broadcast(new ChatSent($receiver, $message));
+        //pusher
     }
 }

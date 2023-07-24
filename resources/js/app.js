@@ -47,6 +47,24 @@ window.Echo.channel('create_news').listen('.new_news',(event)=>{
     </div>`);
 });
 
+window.Echo.private('chat.'+Id).listen('.chatMessage' , (event) => {
+            var msgHistory = $('.msg_history');
+        msgHistory.scrollTop(msgHistory[0].scrollHeight);
+$(".msg_history").append(`
+        <div class="incoming_msg">
+            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+            </div>
+            <div class="received_msg">
+                <div class="received_withd_msg">
+                   
+                    <p>${event.message}</p>
+                    <span class="time_date"> 11:01 AM | June 9</span>
+                </div>
+            </div>
+        </div>`);
+
+        
+});
 
 if (userId !== undefined) {
    window.Echo.private('App.Models.User.'+userId ).notification(
