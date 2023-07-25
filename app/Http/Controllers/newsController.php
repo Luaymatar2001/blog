@@ -18,7 +18,9 @@ class newsController extends Controller
      */
     public function index()
     {
-        $news =  news::with('user')->paginate(10);
+        $news =  news::with('users')->paginate(10);
+        // dd($news->toArray());
+
         return view('news.index')->with('news', $news);
     }
 

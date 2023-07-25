@@ -77,7 +77,6 @@
                             </thead>
                             <tbody>
 
-
                                 @foreach ($news as $singe_news)
                                 <tr id="ID{{ $singe_news->id }}">
                                     <td>{{ $singe_news->id }}</td>

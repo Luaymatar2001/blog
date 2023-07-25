@@ -19,6 +19,7 @@ class news extends Model
   protected $table = 'news';
   protected $fillable = ['title', 'subject', 'user_id', 'source_news', 'image'];
   protected $appends = ['image_url', 'time_format', 'user_name'];
+  
   public function user()
   {
     return $this->belongsTo(user::class, 'user_id')->withDefault([

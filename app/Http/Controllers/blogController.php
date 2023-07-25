@@ -16,7 +16,7 @@ class blogController extends Controller
         $news = news::withoutGlobalScope('owner')->with('user')->latest('updated_at')->get();
         $about = about::firstOrFail();
         $news->loadSum('reviews', 'rate');
-        // dd($news->toArray());
+
         return view('blog.home', ['news' => $news, 'about' => $about]);
     }
 
